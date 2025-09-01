@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfólio profissional de Luiz Gustavo Santos Serrano, estudante de Análise e Desenvolvimento de Sistemas">
+    <title>Luiz Gustavo Santos Serrano | Portfólio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #3b82f6;
+            --accent: #ef4444;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --success: #10b981;
+            --font-primary: 'Montserrat', sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-container {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 5px solid var(--accent);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-container:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .title {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            color: var(--light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--light);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            z-index: 1;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: rgba(37, 99, 235, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--light);
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .about-text {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .highlight {
+            background-color: rgba(59, 130, 246, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: var(--primary);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-category h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-item {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .skill-icon {
+            color: var(--success);
+            font-size: 1.2rem;
+        }
+
+        /* Experience Section */
+        .experience-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .experience-date {
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-mono);
+        }
+
+        /* Education Section */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .education-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .education-period {
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-mono);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--light);
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .social-link {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-link:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .education-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header id="home">
+        <div class="profile-container">
+            <img src="profile.jpg" alt="Luiz Gustavo Santos Serrano" class="profile-pic">
+        </div>
+        <div class="header-content">
+            <h1>Luiz Gustavo Santos Serrano</h1>
+            <p class="title">Estudante de Análise e Desenvolvimento de Sistemas</p>
+            <div class="contact-info">
+                <a href="tel:11993369806" class="contact-link">
+                    <i class="fas fa-phone"></i> (11) 99336-9806
+                </a>
+                <a href="mailto:luiz.gaserrano@gmail.com" class="contact-link">
+                    <i class="fas fa-envelope"></i> luiz.gsserrano@gmail.com
+                </a>
+            </div>
+        </div>
+        <a href="#about" class="scroll-down">
+            <i class="fas fa-chevron-down" style="animation: bounce 2s infinite;"></i>
+        </a>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="logo">GUSTAVO SANTOS</a>
+            <div class="nav-links">
+                <a href="#about" class="nav-link">Sobre</a>
+                <a href="#skills" class="nav-link">Habilidades</a>
+                <a href="#experience" class="nav-link">Experiência</a>
+                <a href="#education" class="nav-link">Formação</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- About Section -->
+        <section id="about">
+            <h2>Sobre Mim</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Busco uma oportunidade para aplicar e expandir meus conhecimentos em tecnologia, contribuindo para o desenvolvimento de soluções inovadoras e eficientes.</p>
+                    
+                    <p>Tenho experiências profissionais anteriores que me proporcionaram habilidades em <span class="highlight">trabalho em equipe</span>, <span class="highlight">resolução de problemas</span> e <span class="highlight">atendimento ao cliente</span>.</p>
+                    
+                    <p>Atualmente cursando <strong>Análise e Desenvolvimento de Sistemas</strong> e desejo me desenvolver profissionalmente na área de TI, focando em <span class="highlight">desenvolvimento de software</span>, <span class="highlight">análise de sistemas</span>, <span class="highlight">help desk</span> e <span class="highlight">banco de dados</span>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2>Habilidades Técnicas</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Linguagens</h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">
+                            <span class="skill-icon"><i class="fab fa-java"></i></span>
+                            <span>Java</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-icon"><i class="fab fa-js"></i></span>
+                            <span>JavaScript</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-icon"><i class="fab fa-html5"></i></span>
+                            <span>HTML</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-icon"><i class="fab fa-css3-alt"></i></span>
+                            <span>CSS</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-database"></i> Banco de Dados</h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">
+                            <span class="skill-icon"><i class="fas fa-database"></i></span>
+                            <span>MySQL</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-icon"><i class="fas fa-database"></i></span>
+                            <span>SQL Server</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-icon"><i class="fas fa-database"></i></span>
+                            <span>Oracle Database</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-tools"></i> Ferramentas</h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">
+                            <span class="skill-icon"><i class="fab fa-git-alt"></i></span>
+                            <span>Git / GitHub</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-icon"><i class="fas fa-chart-line"></i></span>
+                            <span>Power BI</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-icon"><i class="fas fa-file-excel"></i></span>
+                            <span>Pacote Office</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-icon"><i class="fas fa-code-branch"></i></span>
+                            <span>SQL/NoSQL</span>
+                        </li>
+                        <li class="skill-item">
+                            <span class="skill-icon"><i class="fab fa-figma"></i></span>
+                            <span>Figma</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+            <h2>Experiência Profissional</h2>
+            <div class="experience-item">
+                <div class="experience-date">2024 - Atual</div>
+                <h3>BEXP - JEEP MORUMBI</h3>
+                <p><strong>Jovem Aprendiz - ADM</strong></p>
+                <p>Escrituração de NF em sistema, alimentaçao de planilhas e atualizaçao na logística.</p>
+            </div>
+            <div class="experience-item">
+                <div class="experience-date">2022 - 2024</div>
+                <h3>NOTREDAME INTERMEDICA</h3>
+                <p><strong>Jovem Aprendiz - ADM</strong></p>
+                <p>Atendimento a cliente e separação/entrega de medicamentos.</p>
+            </div>
+            <div class="experience-item">
+                <div class="experience-date">2021 - 2022</div>
+                <h3>PBL ASSESSORIA DE COMÉRCIO EXTERIOR LTDA</h3>
+                <p><strong>Jovem Aprendiz - ADM</strong></p>
+                <p>Escrituraçao de NF em sistema e alimentaçao de planilhas excel.</p>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education">
+            <h2>Formação Acadêmica</h2>
+            <div class="education-grid">
+                <div class="education-card">
+                    <div class="education-period">2025 - 2027</div>
+                    <h3>CENTRO UNIVERSITARIO SENAC</h3>
+                    <p>Análise e Desenvolvimento de Sistemas (Em andamento)</p>
+                </div>
+                <div class="education-card">
+                    <div class="education-period">2017 - 2019</div>
+                    <h3>ESCOLA ESTADUAL PROF° ALBERTO LEVY</h3>
+                    <p>Ensino médio completo</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>Luiz Gustavo Santos Serrano</h3>
+            <p>Estudante de Análise e Desenvolvimento de Sistemas</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/gustavo-santos-29a971311/" target="_blank" class="social-link">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/gustavodevv" target="_blank" class="social-link">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <p class="copyright">© 2025 Luiz Gustavo Santos Serrano</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Scroll animation
+            const sections = document.querySelectorAll('section');
+            
+            function checkScroll() {
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (sectionTop < windowHeight - 100) {
+                        section.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Initial check
+            checkScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkScroll);
+        });
+    </script>
+</body>
+</html>
